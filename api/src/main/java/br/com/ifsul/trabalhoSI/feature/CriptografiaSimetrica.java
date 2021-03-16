@@ -17,12 +17,11 @@ public class CriptografiaSimetrica {
         try {
             KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
             SecretKey chaveSecreta = keygenerator.generateKey();
-            Cipher cifraDES;
-
-            byte[] textoBytes = "Exemplo de texto puro".getBytes();
 
             // Cria a forma de criptografia
-            cifraDES = Cipher.getInstance("DES/ECB/PKCS5Padding");
+            Cipher cifraDES= Cipher.getInstance("DES/ECB/PKCS5Padding");
+
+            byte[] textoBytes = "Exemplo de texto puro".getBytes();
 
             // Inicializa a cifra para o processo de encriptação
             cifraDES.init(Cipher.ENCRYPT_MODE, chaveSecreta);
