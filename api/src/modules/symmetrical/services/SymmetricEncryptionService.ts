@@ -1,7 +1,8 @@
 import { injectable } from 'tsyringe';
 
+import CryptoJS from 'crypto-js';
 interface Request {
-  key: string;
+  password: string;
   text: string;
 }
 
@@ -9,7 +10,12 @@ interface Request {
 export class SymmetricEncryptionService {
   constructor() {}
 
-  public async execute({ key, text }: Request): Promise<String> {
-    return 'oiiii';
+  public encryption({ password, text }: Request): String {
+    return CryptoJS.AES.encrypt(text, password).toString();
+  }
+
+  public decryption({ password, text }: Request): String {
+    const bytes = CryptoJS.AES.decrypt(text, password);
+    return bytes.toString(CryptoJS.enc.Utf8);
   }
 }

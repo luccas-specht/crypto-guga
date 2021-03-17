@@ -7,8 +7,8 @@ export const symmetricalRouter = Router();
 
 const authController = new SymmetricalController();
 
-symmetricalRouter.post(
-  '/encrypt',
-  ensureDataRequest,
-  authController.symmetricEncryption
-);
+symmetricalRouter.use(ensureDataRequest);
+
+symmetricalRouter.post('/encrypt', authController.symmetricEncryption);
+
+symmetricalRouter.post('/decryption', authController.symmetricDecryption);

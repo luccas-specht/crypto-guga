@@ -5,7 +5,7 @@ import { Request, Response, NextFunction } from 'express';
 import { AppError } from '@shared/errors/appError';
 
 const schema = Yup.object().shape({
-  key: Yup.string().required('Envia a key pública ai'),
+  password: Yup.string().required('Envia a password pública ai'),
   text: Yup.string().required('Deve ser inserido um texto'),
 });
 
@@ -14,11 +14,11 @@ export async function ensureDataRequest(
   response: Response,
   next: NextFunction
 ): Promise<void> {
-  const { key, text } = request.body;
+  const { password, text } = request.body;
 
   try {
     await schema.validate(
-      { key, text },
+      { password, text },
       {
         abortEarly: false,
       }
