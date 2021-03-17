@@ -1,8 +1,9 @@
 import { Router } from 'express';
 
-import { symmetricalRouter } from '@modules/symmetrical/infra/http/routes/SymmetricalRoute';
+import { symmetricRouter } from '@modules/symmetric/infra/http/routes/SymmetricRoute';
+import { asymmetricRouter } from '@modules/asymmetric/infra/http/routes/AsymetricRoute';
 
 export const routes = Router();
 
-/* symmetrical here: */
-routes.use('/symmetrical', symmetricalRouter);
+routes.use('/symmetric', symmetricRouter);
+routes.use('/asymmetric', asymmetricRouter);

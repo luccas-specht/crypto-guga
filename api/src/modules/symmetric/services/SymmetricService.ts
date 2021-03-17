@@ -1,13 +1,13 @@
 import { injectable } from 'tsyringe';
-
 import CryptoJS from 'crypto-js';
+
 interface Request {
   password: string;
   text: string;
 }
 
 @injectable()
-export class SymmetricEncryptionService {
+export class SymmetricService {
   constructor() {}
 
   public encryption({ password, text }: Request): String {

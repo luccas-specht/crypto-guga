@@ -1,15 +1,13 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { SymmetricEncryptionService } from '../services/SymmetricEncryptionService';
+import { SymmetricService } from '../services/SymmetricService';
 
-export class SymmetricalController {
+export class SymmetricController {
   public symmetricEncryption(request: Request, response: Response): Response {
     const { password, text } = request.body;
 
-    const symmetricEncryptionService = container.resolve(
-      SymmetricEncryptionService
-    );
+    const symmetricEncryptionService = container.resolve(SymmetricService);
 
     const encryptedText = symmetricEncryptionService.encryption({
       password,
@@ -22,9 +20,7 @@ export class SymmetricalController {
   public symmetricDecryption(request: Request, response: Response): Response {
     const { password, text } = request.body;
 
-    const symmetricEncryptionService = container.resolve(
-      SymmetricEncryptionService
-    );
+    const symmetricEncryptionService = container.resolve(SymmetricService);
 
     const decryptionText = symmetricEncryptionService.decryption({
       password,

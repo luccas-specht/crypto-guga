@@ -4,9 +4,11 @@ import { Request, Response, NextFunction } from 'express';
 
 import { AppError } from '@shared/errors/appError';
 
+import { messageValidation } from '@constants/messageValidation';
+
 const schema = Yup.object().shape({
-  password: Yup.string().required('Envia a password pública ai'),
-  text: Yup.string().required('Deve ser inserido um texto'),
+  password: Yup.string().required(messageValidation.requiredkey()),
+  text: Yup.string().required(messageValidation.requiredText()),
 });
 
 export async function ensureDataRequest(
