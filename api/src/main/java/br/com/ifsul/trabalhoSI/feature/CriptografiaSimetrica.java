@@ -1,50 +1,42 @@
 package br.com.ifsul.trabalhoSI.feature;
 
 
+import br.com.ifsul.trabalhoSI.domain.Mensagem;
 import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CriptografiaSimetrica {
-    public void metodo() {
-        try {
-            KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
-            SecretKey chaveSecreta = keygenerator.generateKey();
-            Cipher cifraDES;
+    public String metodo(Mensagem mensagem) throws IllegalBlockSizeException, InvalidKeyException, BadPaddingException, NoSuchAlgorithmException, NoSuchPaddingException {
+        String senha = mensagem.getSenha();
+        Key chaveSecreta = new SecretKeySpec(senha.getBytes(), 0, 8, "DES");
+        byte[] textoBytes = mensagem.getTexto().getBytes();
+        byte[] mensagemCriptografada = criptografar(chaveSecreta, textoBytes);
+        //primeiro recebe senha e texto, retorna mensagem criptografada
 
-            byte[] textoBytes = "Exemplo de texto puro".getBytes();
 
-            // Cria a forma de criptografia
-            cifraDES = Cipher.getInstance("DES/ECB/PKCS5Padding");
-
-            // Inicializa a cifra para o processo de encriptação
-            cifraDES.init(Cipher.ENCRYPT_MODE, chaveSecreta);
-            // Texto encriptado
-            byte[] textoEncriptado = cifraDES.doFinal(textoBytes);
-
-            // Inicializa a cifra também para o processo de decriptação
-            cifraDES.init(Cipher.DECRYPT_MODE, chaveSecreta);
-            // Decriptografa o texto
-            byte[] textoDecriptografado = cifraDES.doFinal(textoEncriptado);
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        }
+        byte[] mensagemDescriptografada=descriptografar(chaveSecreta, mensagemCriptografada);
+        String response=new String(mensagemDescriptografada);
+        return response;
+        //segundo recebe senha e mensagem criptografada, retorna mensagem correta
     }
 
+    public byte[] criptografar(Key chave, byte[] mensagemBytes) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        Cipher cifraDES = Cipher.getInstance("DES/ECB/PKCS5Padding");
+        cifraDES.init(Cipher.ENCRYPT_MODE, chave);
+        return cifraDES.doFinal(mensagemBytes);
+    }
+
+    public byte[] descriptografar(Key chave, byte[] mensagemCriptografada) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        Cipher cifraDES = Cipher.getInstance("DES/ECB/PKCS5Padding");
+        cifraDES.init(Cipher.DECRYPT_MODE, chave);
+        return cifraDES.doFinal(mensagemCriptografada);
+    }
 }
