@@ -21,7 +21,7 @@ public class CriptografiaSimetrica {
         byte[] mensagemCriptografada = criptografar(chaveSecreta, textoBytes);
         //primeiro recebe senha e texto, retorna mensagem criptografada
 
-        
+
         byte[] mensagemDescriptografada=descriptografar(chaveSecreta, mensagemCriptografada);
         String response=new String(mensagemDescriptografada);
         return response;
