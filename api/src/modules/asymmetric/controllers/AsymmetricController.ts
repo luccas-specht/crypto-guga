@@ -4,20 +4,28 @@ import { container } from 'tsyringe';
 import { AsymmetricService } from '../services/AsymmetricService';
 
 export class AsymmetricController {
-  public async asymmetricEncryption(
-    request: Request,
-    response: Response
-  ): Promise<Response> {
+  public asymmetricEncryption(request: Request, response: Response): Response {
     const { text } = request.body;
 
     const asymmetricEncryptionService = container.resolve(AsymmetricService);
 
-    const { publicKey, decodedText } = await asymmetricEncryptionService.geraai(
-      {
-        text,
-      }
-    );
+    const test = asymmetricEncryptionService.encryption({
+      text,
+    });
 
-    return response.json({ publicKey, decodedText });
+    return response.json(test);
+  }
+
+  public symmetricDecryption(request: Request, response: Response): Response {
+    const { publicKey, text } = request.body;
+
+    const symmetricEncryptionService = container.resolve(AsymmetricService);
+
+    const decryptionText = symmetricEncryptionService.decryption({
+      publicKey,
+      text,
+    });
+
+    return response.json({ decryptionText });
   }
 }

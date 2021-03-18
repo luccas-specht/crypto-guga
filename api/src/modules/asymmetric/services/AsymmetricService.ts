@@ -1,24 +1,21 @@
 import { injectable } from 'tsyringe';
-import crypto from 'crypto';
+import crypto, { KeyObject } from 'crypto';
 
 interface Request {
-  text: string;
+  publicKey?: string;
+  text: any;
 }
 
 @injectable()
 export class AsymmetricService {
-  constructor() {}
+  static privateKey: any;
 
-  private generateKeyPair() {
+  public encryption({ text }: Request) {
     const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
       modulusLength: 2048,
     });
 
-    return { publicKey, privateKey };
-  }
-
-  private encryptedText(text: string) {
-    const { publicKey } = this.generateKeyPair();
+    AsymmetricService.privateKey = privateKey;
 
     const encryptedData = crypto.publicEncrypt(
       {
@@ -26,16 +23,45 @@ export class AsymmetricService {
         padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
         oaepHash: 'sha256',
       },
-
       Buffer.from(text)
     );
-    return encryptedData.toString('base64');
+
+    return {
+      publicKey: publicKey
+        .export({ type: 'pkcs1', format: 'pem' })
+        .toString('base64'),
+      decodedText: encryptedData.toString('base64'),
+    };
   }
 
-  public geraai({ text }: Request) {
-    const { publicKey } = this.generateKeyPair();
-    const decodedText = this.encryptedText(text);
+  public decryption({ publicKey = '', text }: Request) {
+    console.log('meu cac', AsymmetricService.privateKey);
 
-    return { publicKey, decodedText };
+    const isVerified = crypto.verify(
+      'sha256',
+      Buffer.from(text),
+      {
+        key: publicKey,
+        padding: crypto.constants.RSA_PKCS1_PSS_PADDING,
+      },
+      crypto.sign('sha256', Buffer.from(text), {
+        key: AsymmetricService.privateKey,
+        padding: crypto.constants.RSA_PKCS1_PSS_PADDING,
+      })
+    );
+
+    if (isVerified) {
+      const decryptedData = crypto.privateDecrypt(
+        {
+          key: AsymmetricService.privateKey,
+          padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+          oaepHash: 'sha256',
+        },
+        text
+      );
+      return {
+        decrypt: decryptedData.toString(),
+      };
+    }
   }
 }

@@ -4,6 +4,7 @@ import { AsymmetricController } from '../../../controllers/AsymmetricController'
 
 export const asymmetricRouter = Router();
 
-const authController = new AsymmetricController();
+const asymmetricController = new AsymmetricController();
 
-asymmetricRouter.post('/encrypt', authController.asymmetricEncryption);
+asymmetricRouter.post('/encrypt', asymmetricController.asymmetricEncryption);
+asymmetricRouter.post('/decryption', asymmetricController.symmetricDecryption);
