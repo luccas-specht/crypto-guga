@@ -1,10 +1,10 @@
 import { injectable } from 'tsyringe';
 import crypto, { KeyObject } from 'crypto';
 
-interface Request {
-  publicKey?: string;
+type Request = {
+  publicKey?: any;
   text: any;
-}
+};
 
 @injectable()
 export class AsymmetricService {
@@ -30,13 +30,11 @@ export class AsymmetricService {
       publicKey: publicKey
         .export({ type: 'pkcs1', format: 'pem' })
         .toString('base64'),
-      decodedText: encryptedData.toString('base64'),
+      text: encryptedData,
     };
   }
 
   public decryption({ publicKey = '', text }: Request) {
-    console.log('meu cac', AsymmetricService.privateKey);
-
     const isVerified = crypto.verify(
       'sha256',
       Buffer.from(text),
@@ -57,11 +55,12 @@ export class AsymmetricService {
           padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
           oaepHash: 'sha256',
         },
-        text
+        Buffer.from(text)
       );
       return {
         decrypt: decryptedData.toString(),
       };
     }
+    return '';
   }
 }

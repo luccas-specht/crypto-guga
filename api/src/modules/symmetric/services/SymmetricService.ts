@@ -1,10 +1,10 @@
 import { injectable } from 'tsyringe';
 import CryptoJS from 'crypto-js';
 
-interface Request {
+type Request = {
   password: string;
   text: string;
-}
+};
 
 @injectable()
 export class SymmetricService {
