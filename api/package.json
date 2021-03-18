@@ -6,17 +6,12 @@
   "scripts": {
     "build": "tsc",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/server.ts",
-    "start": "ts-node src/shared/infra/server.ts",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
+    "start": "ts-node src/shared/infra/server.ts"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.7",
     "@types/crypto-js": "^4.0.1",
     "@types/express": "^4.17.7",
-    "@types/jsonwebtoken": "^8.5.0",
-    "@types/multer": "^1.4.4",
-    "@types/nodemailer": "^6.4.0",
     "ts-node-dev": "^1.0.0-pre.57",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.7"
@@ -24,22 +19,12 @@
   "dependencies": {
     "-": "^0.0.1",
     "D": "^1.0.0",
-    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "crypto-js": "^4.0.0",
-    "date-fns": "^2.16.1",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
-    "handlebars": "^4.7.6",
-    "jsonwebtoken": "^8.5.1",
-    "multer": "^1.4.2",
-    "nodemailer": "^6.4.16",
-    "pg": "^8.4.0",
     "reflect-metadata": "^0.1.13",
     "ts-jest": "^26.4.4",
-    "tsyringe": "^4.4.0",
-    "typeorm": "^0.2.28",
-    "uuidv4": "^6.2.3",
-    "yup": "^0.32.8"
+    "tsyringe": "^4.4.0"
   }
 }

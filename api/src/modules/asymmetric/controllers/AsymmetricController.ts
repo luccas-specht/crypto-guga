@@ -9,11 +9,11 @@ export class AsymmetricController {
 
     const asymmetricEncryptionService = container.resolve(AsymmetricService);
 
-    const test = asymmetricEncryptionService.encryption({
+    const encryptedText = asymmetricEncryptionService.encryption({
       text,
     });
 
-    return response.json(test);
+    return response.json(encryptedText);
   }
 
   public symmetricDecryption(request: Request, response: Response): Response {
@@ -21,11 +21,11 @@ export class AsymmetricController {
 
     const symmetricEncryptionService = container.resolve(AsymmetricService);
 
-    const decryptionText = symmetricEncryptionService.decryption({
+    const decrytedText = symmetricEncryptionService.decryption({
       publicKey,
       text,
     });
 
-    return response.json({ decryptionText });
+    return response.json(decrytedText);
   }
 }

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { AsymmetricController } from '../../../controllers/AsymmetricController';
+import { AsymmetricController } from '../controllers/AsymmetricController';
 
 export const asymmetricRouter = Router();
 
