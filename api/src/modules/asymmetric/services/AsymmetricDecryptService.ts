@@ -62,6 +62,7 @@ export class AsymmetricDecryptService {
     }
 
     if (base64[base64.length - 1] === '=') {
+      bufferLength--;
       if (base64[base64.length - 2]) {
         bufferLength--;
       }
