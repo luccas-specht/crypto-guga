@@ -7,10 +7,10 @@ interface PropsInputText {
   name: string;
   value: string;
   placeholder: string;
-  onChange: (event: any) => void;
+  onChange?: (event: any) => void;
 }
 
-export const InputText = ({ id, name, value, placeholder, type }: PropsInputText) => {
+export const InputText = ({ id, name, value, placeholder, type, onChange }: PropsInputText) => {
   return (
     <SC.Container>
       <SC.Input
@@ -19,6 +19,7 @@ export const InputText = ({ id, name, value, placeholder, type }: PropsInputText
         name={name}
         value={value}
         placeholder={placeholder}
+        onChange={onChange}
       />
     </SC.Container>
   );

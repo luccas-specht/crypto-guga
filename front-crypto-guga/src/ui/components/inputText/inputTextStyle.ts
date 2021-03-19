@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   margin-top: 50px;
-  background-color: #ffffff;
   border-radius: 10px;
   padding: 32px;
   width: 100%;
@@ -13,10 +12,9 @@ export const Container = styled.div`
 export const Input = styled.input`
   color: #333;
   background: transparent;
-  border: 0;
+  border: 1px solid black;
   outline: none;
-
-  &::placeholder {
-    color: #333;
-  }
+  width:100%;
+  padding: 20px 10px;
+  border-radius: 15px;
 `;
