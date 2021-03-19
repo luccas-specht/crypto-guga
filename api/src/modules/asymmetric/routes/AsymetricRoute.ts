@@ -6,5 +6,5 @@ export const asymmetricRouter = Router();
 
 const asymmetricController = new AsymmetricController();
 
-asymmetricRouter.post('/encrypt', asymmetricController.asymmetricEncryption);
-asymmetricRouter.post('/decryption', asymmetricController.symmetricDecryption);
+asymmetricRouter.post('/encrypt', asymmetricController.asymmetricEncrypt);
+asymmetricRouter.post('/decryption', asymmetricController.asymmetricDecrypt);
