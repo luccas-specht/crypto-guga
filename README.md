@@ -2,7 +2,7 @@
 
 Como utilizar:
 <ul>
-  <li>Rodar: git clone </li>
+  <li>Rodar: git clone https://github.com/luccas-specht/crypto-guga.git </li>
 </ul>
 
 Rodar API: 
@@ -16,5 +16,5 @@ Rodar API:
 Testar requisições ao Insomnia: 
 <ul>
   <li>Precisa ter o software <a href='https://insomnia.rest/download'>Insomnia</a> instalado.</li>
-  <li>Precisa ter o software <a href='https://insomnia.rest/download'>Insomnia</a> instalado.</li>
+  <li>importar o arquivo dentro da pasta  <a href='https://insomnia.rest/download'>Insomnia</a> instalado.</li>
 </ul>
