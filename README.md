@@ -18,13 +18,3 @@ Testar requisições ao Insomnia:
   <li>Precisa ter o software <a href='https://insomnia.rest/download'>Insomnia</a> instalado.</li>
   <li>importar o arquivo, Insomnia-Crypto-guga.json, da pasta Insomnia para o software instalado.</li>
 </ul>
-
-Rodar projeto React (Front-end): 
-<ul>
-  <li>Rodar: yarn install</li>
-  <li>Rodar: yarn start</li>
-</ul>
-
-
-<strong>OBS</strong> </br>
-Para poder usar a API e Front em perfeita sincronia, ambos devem estar rodando em suas respectivas portas: 3333 e 3000.
